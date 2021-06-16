@@ -8,9 +8,11 @@ Documentation   Nesse arquivo incluimos todos os exercícios do Prime Experts
 #Minha primeira variável simples
 ${NOME}     Ana Carolina
 
+${DOMINIO}   @robot.com   
+
 #Minha primeira variável tipo dicionário
 &{PESSOA}   
-...     nome=Ana    
+...     nome=ana    
 ...     sobrenome=Ribeiro   
 ...     idade=35 
 ...     cidade=Brasilia
@@ -62,6 +64,12 @@ Cenario: Meu teste soma
     [Tags]  SOMA_2
         ${RESULTADO}    Somar dois numeros "55" e "44"
     Log To Console  ${RESULTADO} 
+
+Cenario: Gerar Email
+    [Tags]  TESTE_EMAIL
+    ${EMAIL}    Monta Email   ${PESSOA.nome}    ${PESSOA.sobrenome}     ${PESSOA.idade}
+    Log To Console    ${\n}O e-mail é: ${EMAIL}
+    
     
     
 ***Keywords***
@@ -73,6 +81,12 @@ Somar dois numeros
 Somar dois numeros "${NUM_A}" e "${NUM_B}"
     ${SOMA}         Evaluate      ${NUM_A}+${NUM_B}
     [Return]        ${SOMA}
+
+Monta Email 
+    [Arguments]     ${PESSOA.nome}      ${PESSOA.sobrenome}     ${PESSOA.idade}     
+    [Return]        ${PESSOA.nome}_${PESSOA.sobrenome}_${PESSOA.idade}@robot.com
+
+            
     
 
     
